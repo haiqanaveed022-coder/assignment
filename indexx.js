@@ -27,9 +27,16 @@
 //let y = 3;   // exponent
 //console.log(Math.pow(x, y));
 
+
 ////number guessing
 //let n = Math.floor(Math.random() * 10) + 1;
 //let g = Number(prompt("Guess 1-10:"));
 //console.log(g === n ? "You guessed it!" : "Wrong, it was " + n);
+
+//number guessing
+let n = Math.floor(Math.random() * 10) + 1;
+let g = Number(prompt("Guess 1-10:"));
+console.log(g === n ? "You guessed it!" : "Wrong, it was " + n);
+
 
 
