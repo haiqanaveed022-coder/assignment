@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stopwatch</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background-color: #f2f2f2;
+            margin-top: 100px;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        #display {
+            font-size: 30px;
+            margin: 15px;
+        }
+
+        #liveTime {
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Stopwatch</h1>
+
+    <div id="display">00 : 00 : 00</div>
+    <div id="liveTime">Current Time: -- : -- : --</div>
+
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
+    <button onclick="resetTimer()">Reset</button>
+
+    <script>
+        let sec = 0;
+        let min = 0;
+        let hr = 0;
+        let interval = null;
+
+        // LIVE CLOCK (always running)
+        setInterval(showLiveTime, 1000);
+
+        function showLiveTime() {
+            let now = new Date();
+            document.getElementById("liveTime").innerHTML =
+                "Current Time: " + now.toLocaleTimeString();
+        }
+
+        function startTimer() {
+            if (interval !== null) {
+                return;
+            }
+
+            // console start time (same like before)
+            console.log("Stopwatch started at:", new Date().toLocaleString());
+
+            interval = setInterval(updateTime, 1000);
+        }
+
+        function updateTime() {
+            sec++;
+
+            if (sec == 60) {
+                sec = 0;
+                min++;
+            }
+
+            if (min == 60) {
+                min = 0;
+                hr++;
+            }
+
+            document.getElementById("display").innerHTML =
+                (hr < 10 ? "0" + hr : hr) + " : " +
+                (min < 10 ? "0" + min : min) + " : " +
+                (sec < 10 ? "0" + sec : sec);
+        }
+
+        function stopTimer() {
+            clearInterval(interval);
+            interval = null;
+        }
+
+        function resetTimer() {
+            stopTimer();
+            sec = 0;
+            min = 0;
+            hr = 0;
+            document.getElementById("display").innerHTML = "00 : 00 : 00";
+        }
+    </script>
+
+</body>
+</html>
